@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Product Detail</h2>
+    <p><strong>Name:</strong> {{ product.name }}</p>
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% else %}
+    <p>No image available</p>
+    {% endif %}
+    <p><strong>Category:</strong> {{ product.category }}</p>
+    <p><strong>Price:</strong> ₹{{ product.price }}</p>
+    <p><strong>Description:</strong> {{ product.description }}</p>
+    <button type="submit" formaction="{% url 'product_update' product.pk %}">Edit</button>
+    <form action="{% url 'product_delete' product.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+</body>
+
+</html>

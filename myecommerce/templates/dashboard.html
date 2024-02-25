@@ -1,0 +1,36 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<div>
+    <h3>Dashboard</h3>
+
+    <a href="{% url 'add_post' %}" class="btn btn-success">Add Post</a>
+
+    {% for i in posts %}
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>{{i.title}}</td>
+            <td>{{i.desc}}</td>
+            <td>
+                {% if perms.blog.edit_post %}
+                <a href="{% url 'update_post' i.id %}" class="btn btn-warning">Edit</a>
+                {% endif %}
+                <form action="" method="post">
+                    {%csrf_token%}
+                    <button type="submit" class="btn btn-danger"
+                        formaction="{% url 'delete_post' i.id %}">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

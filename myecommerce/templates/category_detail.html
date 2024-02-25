@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Detail</title>
+</head>
+<body>
+    <h2>Category Detail</h2>
+    <p><strong>Name:</strong> {{ category.name }}</p>
+
+    <a href="{% url 'category_update' category.pk %}">Edit</a>
+    <form action="{% url 'category_delete' category.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+</body>
+</html>
